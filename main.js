@@ -14,6 +14,8 @@ window.onload=function() {
 	cheat.style.display = "none";
     ctx=canv.getContext("2d");
 	document.addEventListener("keydown",keyPush);
+	on.addEventListener("click", music);
+	off.addEventListener("click", music);
     handle = setInterval(game,1000/15);
 }
 
