@@ -38,6 +38,15 @@ left = false;
 right = false;
 up = false;
 down = false;
+text = "SNAKE THE GAME";
+i = 0;
+
+function typing(){
+	if (i < text.length){
+		document.getElementById("text").innerHTML += text.charAt(i++)
+		setTimeout(typing, 100);
+	}
+}
 
 function music(){
 	if (onOff){
@@ -70,6 +79,7 @@ function loser(exit){
 }
 
 function game() {
+	typing();
     posX+=velocityX;
 	posY+=velocityY;
 	
