@@ -41,11 +41,11 @@ down = false;
 
 function music(){
 	if (onOff){
-		off.style.display = "inline-block";
+		off.style.display = "block";
 		on.style.display = "none";
 	}
 	else{
-		on.style.display = "inline-block";
+		on.style.display = "block";
 		off.style.display = "none";
 	}
 	onOff = (onOff == true) ? false : true;
