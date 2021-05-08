@@ -8,11 +8,11 @@ span{
 }
 
 canvas{
-	border: 10px solid lightblue;
+	border: 0px solid lightblue;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 10%;
+	margin-top: 3%;
 	margin-bottom: 1%;
 }
 
@@ -36,3 +36,16 @@ div{
 	font-size: x-large;
 	font-weight: 900;
 }
+
+#restart{
+	margin-top: 1%;
+}
+
+#slidecontainer{
+	margin-top: 1%;
+}
+
+*:focus {
+	outline: 0;
+	outline: none;
+  }

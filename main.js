@@ -1,4 +1,14 @@
+function check_speed(){
+	if (val != slider.value){
+		val = slider.value;
+		clearInterval(handle);
+		handle = setInterval(game, (10 - val)*50)
+	}
+}
+
 window.onload=function() {
+	slider = document.getElementById("myRange");
+	val = slider.value;
 	canv=document.getElementById("map");
 	score = document.getElementById("apple");
 	on = document.getElementById("on");
@@ -9,17 +19,18 @@ window.onload=function() {
 	cheat = document.getElementById("cheat");
 	end.style.display = "none";
 	fin.style.display = "none";
-	off.style.display = "none";
+	on.style.display = "none";
 	easy.style.display = "none";
 	cheat.style.display = "none";
     ctx=canv.getContext("2d");
 	document.addEventListener("keydown",keyPush);
 	on.addEventListener("click", music);
 	off.addEventListener("click", music);
-    handle = setInterval(game,1000/15);
+    handle = setInterval(game, (10 - val) * 50);
+	checker = setInterval(check_speed, 10);
 }
 
-posX=10;  
+posX=10;
 posY=10;
 gridSize=20;
 tileCount=20;
@@ -31,8 +42,8 @@ trail=[];
 tail = 5;
 counter = 0;
 sound = document.getElementById("sound");
-onOff = true;
-border = true;
+onOff = false;
+border = false;
 start = false;
 left = false;
 right = false;
@@ -40,6 +51,9 @@ up = false;
 down = false;
 text = "SNAKE THE GAME";
 i = 0;
+d = 0;
+
+ANGLE = 20;
 
 function typing(){
 	if (i < text.length){
@@ -61,11 +75,31 @@ function music(){
 }
 
 function setBorder(){
-	if (border)
+	if (border){
 		canv.style.border = "none" ;
+	}
 	else
 		canv.style.border = "10px solid lightblue";
 	border = (border == true) ? false : true;
+	easy.style.display = (easy.style.display == "none") ? easy.style.display = "block" : easy.style.display = "none";
+}
+
+function rottenSnake(){
+	var res = document.getElementById("restart");
+	if (ANGLE > 0){
+		d++;
+		if (d < ANGLE)
+			res.style.transform = "rotate(" + d + "deg)";
+		else
+			ANGLE = -ANGLE;
+	}
+	else{
+		d--;
+		if (d > ANGLE)
+			res.style.transform = "rotate(" + d + "deg)";
+		else
+			ANGLE = -ANGLE;
+	}
 }
 
 function loser(exit){
@@ -76,13 +110,15 @@ function loser(exit){
 	else
 		fin.style.display = "block";
 	clearInterval(handle);
+	clearInterval(checker);
+	setInterval(rottenSnake, 20);
 }
 
 function game() {
 	typing();
     posX+=velocityX;
 	posY+=velocityY;
-	
+
 	if(posX<0) {
 		if (!border)
 			posX= tileCount-1;
@@ -109,7 +145,7 @@ function game() {
 	}
     ctx.fillStyle="grey";
     ctx.fillRect(0,0,canv.width,canv.height);
- 
+
 	ctx.fillStyle="white";
     for(var i=0;i<trail.length;i++) {
         ctx.fillRect(trail[i].x*gridSize,trail[i].y*gridSize,gridSize-2,gridSize-2);
@@ -128,7 +164,7 @@ function game() {
     while(trail.length>tail) {
     trail.shift();
     }
- 
+
     if(appleX==posX && appleY==posY) {
 		tail++;
 		counter++;
@@ -145,10 +181,27 @@ function keyPush(evt) {
     switch(evt.keyCode) {
 		case 16:
 			setBorder();
-			easy.style.display = (easy.style.display == "none") ? easy.style.display = "block" : easy.style.display = "none";
+			break;
+		case 17:
+			if (slider.value == slider.min)
+				slider.value == slider.max;
+			else
+				slider.stepDown(1);
+			break;
+		case 91:
+			if (slider.value == slider.min)
+				slider.value == slider.max;
+			else
+				slider.stepDown(1);
+			break;
+		case 18:
+			music();
 			break;
 		case 32:
-			music();
+			if (slider.value == slider.max)
+				slider.value == slider.min;
+			else
+				slider.stepUp(1);
 			break;
 		//left
         case 37:

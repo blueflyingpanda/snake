@@ -8,14 +8,18 @@
 	</head>
 	<body>
 		<div id="text"></div>
+		<div id="restart"><a href="index.html"><img src="icon.png"></img></a></div>
+		<div id="slidecontainer">
+			<input type="range" min="1" max="9" value="1" id="myRange">
+		</div>
 		<canvas id="map" width="400" height="400"></canvas>
 		<span id="apple">0 apples</span>
 		<img id="on" src="on.png" onclick="main.js"></img>
 		<img id="off" src="off.png" onclick="main.js"></img>
 		<span id="cheat"><br /><br />Stop cheating!<br /> You don't get apples for this.</span>
-		<span id="easy"><br /><br />That would be easy!<br /> But don't eat your tail.</span>
+		<span id="easy"><br /><br />That would be hard!<br /> Don't hit the wall.</span>
 		<span id="end"><br /><br />You Lost! Don't hit the borders.<br /> Restart page to play again...</span>
-		<span id="fin"><br /><br />You Lost! Don't eat your tail.<br /> Restart page to play again...</span>
+		<span id="fin"><br /><br />You Lost! Don't eat your tail.<br /> Click on the snake to play again...</span>
 		<audio id="sound" src="bite.mp3"></audio>
 		<script src="main.js"></script>
 	</body>
